@@ -1,4 +1,3 @@
-# instancesegmentation_api
 api/microservice for the Instance Segmentation view of my GlimpseAI
 
 Instance Segmentation model and api interface for the "DeConv Cam" view in my GlimpseAI (working name) app here: https://github.com/rashanarshad/react_deconv
