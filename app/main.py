@@ -23,16 +23,13 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
-    "http://localhost:3000",
+    "*"
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -98,6 +95,11 @@ rcnn = modellib.MaskRCNN(mode="inference", model_dir='../', config=TestConfig())
 # load coco model weights
 rcnn.load_weights('mask_rcnn_coco.h5', by_name=True)
 rcnn.keras_model._make_predict_function()
+
+@app.get('/health-check')
+def healthcheck():
+    return {'healthy': 'true'}
+
 
 @app.post('/')
 async def return_masked(file: str = Form(...)):
